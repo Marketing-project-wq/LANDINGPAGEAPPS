@@ -12,37 +12,74 @@ app.get('/', (req, res) => {
     let html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf-8');
 
     // Replace dc-import with app preview content
-    const appPreviewHtml = `<div style="position:absolute;inset:0;background:#0a0a0d;display:flex;flex-direction:column;color:#fff;overflow:hidden;font-family:system-ui">
-  <div style="background:#1a1a1e;padding:16px;border-bottom:1px solid #2a2a2f;text-align:center">
-    <div style="font-size:12px;color:#999">2OFIT</div>
+    const appPreviewHtml = `<div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0d 0%,#1a1a1e 100%);display:flex;flex-direction:column;color:#fff;overflow:hidden;font-family:system-ui;padding:0">
+  <!-- Status Bar -->
+  <div style="background:rgba(10,10,13,0.8);padding:8px 16px;font-size:11px;display:flex;justify-content:space-between;border-bottom:1px solid rgba(230,0,18,0.1)">
+    <span>9:41</span>
+    <span style="color:#E60012">●●●●●</span>
   </div>
-  <div style="flex:1;padding:16px;display:flex;flex-direction:column;gap:16px;overflow-y:auto">
-    <div style="background:#1a1a1e;border-radius:12px;padding:16px;border:1px solid #2a2a2f">
-      <div style="font-size:12px;color:#999;margin-bottom:8px">Today's Sessions</div>
-      <div style="font-size:28px;font-weight:700;color:#E60012">3</div>
-      <div style="font-size:11px;color:#666;margin-top:4px">Keep it up! 💪</div>
-    </div>
-    <div style="background:#1a1a1e;border-radius:12px;padding:16px;border:1px solid #2a2a2f">
-      <div style="font-size:12px;color:#999;margin-bottom:8px">Weekly Progress</div>
-      <div style="display:flex;gap:4px;margin:12px 0">
-        <div style="flex:1;height:4px;background:#E60012;border-radius:2px"></div>
-        <div style="flex:1;height:4px;background:#E60012;border-radius:2px"></div>
-        <div style="flex:1;height:4px;background:#E60012;border-radius:2px"></div>
-        <div style="flex:1;height:4px;background:#2a2a2f;border-radius:2px"></div>
+
+  <!-- Header -->
+  <div style="background:linear-gradient(180deg,rgba(230,0,18,0.15) 0%,rgba(230,0,18,0.05) 100%);padding:20px 16px;border-bottom:2px solid #E60012;text-align:center">
+    <div style="font-size:11px;color:#E60012;font-weight:700;letter-spacing:1px;margin-bottom:4px">2OFIT</div>
+    <div style="font-size:14px;font-weight:700;color:#fff">Dashboard</div>
+  </div>
+
+  <!-- Content -->
+  <div style="flex:1;padding:12px;display:flex;flex-direction:column;gap:12px;overflow-y:auto">
+    <!-- Main Stats -->
+    <div style="background:rgba(230,0,18,0.1);border:1px solid rgba(230,0,18,0.3);border-radius:8px;padding:12px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div>
+          <div style="font-size:10px;color:#E60012;font-weight:700;text-transform:uppercase;letter-spacing:0.5px">Today</div>
+          <div style="font-size:20px;font-weight:700;color:#fff;margin-top:4px">48 min</div>
+        </div>
+        <div style="font-size:24px">⏱️</div>
       </div>
-      <div style="font-size:11px;color:#666">3 of 7 days completed</div>
+      <div style="height:2px;background:rgba(230,0,18,0.2);border-radius:1px;overflow:hidden">
+        <div style="width:65%;height:100%;background:#E60012;border-radius:1px"></div>
+      </div>
     </div>
-    <div style="background:#1a1a1e;border-radius:12px;padding:16px;border:1px solid #2a2a2f">
-      <div style="font-size:12px;color:#999;margin-bottom:12px">Available Features</div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;align-items:center;gap:8px"><div style="width:6px;height:6px;background:#E60012;border-radius:50%"></div><div style="font-size:11px">Track Sessions</div></div>
-        <div style="display:flex;align-items:center;gap:8px"><div style="width:6px;height:6px;background:#E60012;border-radius:50%"></div><div style="font-size:11px">Wellness Data</div></div>
-        <div style="display:flex;align-items:center;gap:8px"><div style="width:6px;height:6px;background:#E60012;border-radius:50%"></div><div style="font-size:11px">Doctor Consult</div></div>
+
+    <!-- Stats Grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(230,0,18,0.2);border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:18px;font-weight:700;color:#E60012">12</div>
+        <div style="font-size:9px;color:#999;margin-top:4px">Sessions</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(230,0,18,0.2);border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:18px;font-weight:700;color:#E60012">92%</div>
+        <div style="font-size:9px;color:#999;margin-top:4px">Complete</div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(230,0,18,0.2);border-radius:8px;padding:10px">
+      <div style="font-size:10px;color:#E60012;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">Features</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;gap:6px;font-size:10px">
+          <div style="width:4px;height:4px;background:#E60012;border-radius:50%;flex-shrink:0"></div>
+          <span>Track Sessions</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:10px">
+          <div style="width:4px;height:4px;background:#E60012;border-radius:50%;flex-shrink:0"></div>
+          <span>Wellness Data</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:10px">
+          <div style="width:4px;height:4px;background:#E60012;border-radius:50%;flex-shrink:0"></div>
+          <span>Doctor Notes</span>
+        </div>
       </div>
     </div>
   </div>
-  <div style="background:#1a1a1e;padding:12px;border-top:1px solid #2a2a2f;text-align:center">
-    <div style="font-size:10px;color:#666">Download: App Store • Play Store</div>
+
+  <!-- Footer -->
+  <div style="background:rgba(10,10,13,0.9);padding:12px;border-top:1px solid rgba(230,0,18,0.2);text-align:center">
+    <div style="display:flex;justify-content:space-around;font-size:20px">
+      <span>📊</span>
+      <span style="color:#E60012">🏋️</span>
+      <span>⚙️</span>
+    </div>
   </div>
 </div>`;
 
