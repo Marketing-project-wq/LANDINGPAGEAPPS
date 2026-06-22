@@ -85,6 +85,10 @@ app.get('/', (req, res) => {
 
     html = html.replace(/<dc-import[^>]*><\/dc-import>/g, appPreviewHtml);
 
+    // Remove loading indicators
+    html = html.replace(/<div id="__bundler_loading"[^>]*>[\s\S]*?<\/div>/g, '');
+    html = html.replace(/<div id="__bundler_thumbnail"[^>]*>[\s\S]*?<\/div>/g, '');
+
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.send(html);
   } catch (err) {
